@@ -1,0 +1,410 @@
+/* ===== PART 1: CORE STRUCTURE ===== */
+.nasa-login-register-warper {
+  --nasa-primary: #f76b6a;
+  --nasa-secondary: #000000;
+  --nasa-border: #e0e0e0;
+  --nasa-text: #333333;
+  --nasa-light-text: #777777;
+  --nasa-input-height: 44px;
+  --nasa-button-height: 44px;
+  --nasa-radius: 12px;
+  --nasa-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: min(460px, 92vw);
+  max-height: min(600px, 90vh);
+  background: #ffffff;
+  border-radius: var(--nasa-radius) var(--nasa-radius) 0 0;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--nasa-transition);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.nasa-login-register-warper.nasa-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Hide privacy policy text */
+.woocommerce-privacy-policy-text {
+  display: none !important;
+}
+
+#nasa_customer_login {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 3. Ensure login form takes available space */
+#nasa_customer_login .nasa_login-form {
+  width: 100%;
+  transition: transform var(--nasa-transition);
+  position: relative;
+  flex-grow: 1; /* Add this */
+  display: flex; /* Add this */
+  flex-direction: column; /* Add this */
+}
+
+#nasa_customer_login .nasa_register-form {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  visibility: hidden;
+}
+
+#nasa_customer_login.show-register .nasa_login-form {
+  transform: translateX(-100%);
+}
+
+#nasa_customer_login.show-register .nasa_register-form {
+  transform: translateX(-100%);
+  visibility: visible;
+}
+
+#nasa-login-register-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nasa-form-logo-log {
+  padding: 18px 25px;
+  border-bottom: 1px solid var(--nasa-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 75px;
+  flex-shrink: 0;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.nasa-form-logo-log .header_logo {
+  max-height: 50px;
+  width: auto;
+  max-width: 180px;
+  transition: transform var(--nasa-transition);
+}
+
+/* 1. Make the form content a flex container */
+.nasa-form-content {
+  padding: 25px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--nasa-border) transparent;
+  overscroll-behavior: contain;
+  display: flex; /* Add this */
+  flex-direction: column; /* Add this */
+}
+
+/* Form Elements */
+.nasa-form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--nasa-secondary);
+  margin: 0 0 25px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.form-row {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--nasa-secondary);
+  font-size: 14px;
+}
+
+/* Input Styles */
+.woocommerce-Input,
+.phone-input-wrapper input,
+.phone-input-wrapper span,
+.msg91-otp-wrapper input {
+  width: 100% !important;
+  padding: 0 15px !important;
+  border: 2px solid var(--nasa-border) !important;
+  border-radius: 8px !important;
+  font-size: 15px !important;
+  height: var(--nasa-input-height) !important;
+  transition: all var(--nasa-transition) !important;
+  background: #fff !important;
+  color: var(--nasa-text) !important;
+}
+
+/* Phone Input Specific Styles */
+.phone-input-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 15px;
+}
+
+.phone-input-wrapper span {
+  width: auto !important;
+  min-width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5 !important;
+  border-right: none !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.phone-input-wrapper input {
+  border-left: none !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+/* OTP Section Styles */
+.msg91-otp-section {
+ 
+  border-top: 1px solid var(--nasa-border) !important;
+}
+
+.msg91-otp-wrapper {
+  display: none;
+  margin-top: 15px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.msg91-otp-wrapper.active {
+  display: block !important;
+}
+
+#msg91_verify_otp_login,
+#msg91_verify_otp_register {
+  display: none !important;
+}
+
+
+#msg91_verify_otp_login.active,
+#msg91_verify_otp_register.active {
+  display: flex !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons */
+.woocommerce-button,
+.woocommerce-Button,
+.button {
+  width: 100% !important;
+  padding: 0 15px !important;
+  background: var(--nasa-secondary) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  height: var(--nasa-button-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  cursor: pointer !important;
+  transition: all var(--nasa-transition) !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+  margin-top: 10px !important;
+}
+
+/* 2. Push the switch form to the bottom */
+.nasa-switch-form {
+  margin: 20px 0 0;
+  padding: 15px 0;
+  text-align: center;
+  position: sticky; /* Changed from relative */
+  bottom: 0; /* Stick to bottom */
+  font-size: 14px;
+  border-top: 1px solid var(--nasa-border);
+  background: #ffffff;
+  margin-top: auto; /* Push to bottom */
+}
+
+.nasa-switch-form a {
+  color: var(--nasa-secondary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+
+
+
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .nasa-login-register-warper {
+    width: 100%;
+    max-height: min(680px, 90vh);
+    border-radius: var(--nasa-radius) var(--nasa-radius) 0 0;
+    overflow: visible; /* Allow forms to extend beyond container */
+  }
+
+  .nasa-form-content {
+    max-height: calc(95vh - 120px) !important;
+    overflow-y: auto;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 60px; /* NEW: Space for sticky elements */
+  }
+
+  /* Fix form container positioning */
+  #nasa_customer_login {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    transition: transform var(--nasa-transition);
+  }
+
+  /* Form sizing and positioning */
+  #nasa_customer_login .nasa_login-form,
+  #nasa_customer_login .nasa_register-form {
+    width: 100%;
+    flex-shrink: 0;
+    padding: 0 10px;
+    z-index: 1; /* NEW: Ensure proper stacking */
+  }
+
+  /* Register form initially hidden */
+  #nasa_customer_login .nasa_register-form {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  /* Slide forms when register is active */
+  #nasa_customer_login.show-register {
+    transform: translateX(-50%);
+  }
+
+  .phone-input-wrapper {
+    flex-direction: row !important;
+  }
+
+  .phone-input-wrapper span,
+  .phone-input-wrapper input {
+    height: var(--nasa-input-height) !important;
+  }
+
+  /* NEW: OTP Section Mobile Fixes */
+  .msg91-otp-section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .msg91-otp-wrapper input {
+    font-size: 18px !important;
+    padding: 0 10px !important;
+    letter-spacing: 8px !important;
+  }
+
+  #msg91_verify_otp_login,
+  #msg91_verify_otp_register {
+    display: none !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  #msg91_verify_otp_login.active,
+  #msg91_verify_otp_register.active {
+    display: flex !important;
+    margin-top: 15px;
+  }
+
+  /* Ensure sticky elements stay visible */
+  .nasa-switch-form {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 15px 0 10px;
+    margin-top: auto;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 2;
+  }
+  
+  #nasa-login-register-form {
+    overflow: visible;
+    overflow-y: auto; /* NEW: Enable vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* NEW: Smooth scrolling on iOS */
+  }
+}
+
+
+
+
+
+
+
+
+/* Prevent Theme Conflicts */
+.nasa-login-register-warper * {
+  box-sizing: border-box !important;
+}
+
+.nasa-login-register-warper form {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nasa-login-register-warper input,
+.nasa-login-register-warper button {
+  font-family: inherit !important;
+  line-height: normal !important;
+}
+
+/* Hide Multiple Forms */
+.nasa_login-form,
+.nasa_register-form {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Messages */
+#msg91_otp_message_login,
+#msg91_otp_message_register {
+  margin: 15px 0 !important;
+  padding: 12px 15px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.woocommerce-error {
+  background: #fff0f0 !important;
+  border-left: 4px solid #ff4d4d !important;
+  color: #d63638 !important;
+}
+
+.woocommerce-success {
+  background: #f0fff0 !important;
+  border-left: 4px solid #00c853 !important;
+  color: #00a32a !important;
+}
